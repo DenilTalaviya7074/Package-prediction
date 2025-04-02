@@ -2,7 +2,7 @@ import streamlit as st
 import joblib
 
 # Load the trained model
-model = joblib.load("placement_prediction.pkl")  # Ensure you have a trained model saved as 'model.pkl'
+model = joblib.load("placement_prediction_1.pkl")  # Ensure you have a trained model saved as 'model.pkl'
 
 # Streamlit UI
 st.title("CGPA to Package Prediction")

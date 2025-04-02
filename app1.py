@@ -1,15 +1,22 @@
 import streamlit as st
-import joblib
+import pickle
+import numpy as np
 
 # Load the trained model
-model = joblib.load("placement_prediction_1.pkl")  # Ensure you have a trained model saved as 'model.pkl'
+with open('placement_prediction_1.pkl', 'rb') as model_file:
+    model = pickle.load(model_file)
 
-# Streamlit UI
-st.title("CGPA to Package Prediction")
-st.write("Enter your CGPA to predict the expected package")
+# Streamlit App Title
+st.title("Linear Regression Model Deployment")
 
-cgpa = st.number_input("Enter CGPA", min_value=0.0, max_value=10.0, step=0.01)
+# User Input
+st.write("Enter the values for prediction:")
+input_value = st.number_input("Enter a numeric value:", min_value=0.0, max_value=10.0, step=0.1)
 
+# Make Prediction
 if st.button("Predict"):
-    prediction = model.predict([[cgpa]])[0]
-    st.success(f"Predicted Package: {prediction:.2f} LPA")
+    input_array = np.array([[input_value]])  # Reshape input for model
+    prediction = model.predict(input_array)
+    st.write(f"Predicted Output: {prediction[0]:.2f} LPA")
+
+# Run this script using: streamlit run app.py
